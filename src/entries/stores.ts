@@ -1,15 +1,15 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk, { ThunkMiddleware } from 'redux-thunk';
-import { sampleReducer } from '../modules/sample/reducers';
+import { init, RematchDispatch, RematchRootState } from '@rematch/core';
 import { trackingMiddleware } from '../common/middleware/tracking.middleware';
+import { rematchModels, RootRematch } from './rematchModels';
 
-const reducers = combineReducers({
-  sample: sampleReducer,
+export const store = init({
+  models: rematchModels,
+  redux: {
+    middlewares: [trackingMiddleware],
+  },
 });
 
-export type AppState = ReturnType<typeof reducers>;
-
-export const store = createStore(
-  reducers,
-  applyMiddleware(thunk as ThunkMiddleware<AppState>, trackingMiddleware),
-);
+export type Store = typeof store;
+export type RDispatch = RematchDispatch<RootRematch>;
+// export type RDispatch = any;
+export type AppState = RematchRootState<RootRematch>;

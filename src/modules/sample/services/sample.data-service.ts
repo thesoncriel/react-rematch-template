@@ -7,12 +7,12 @@ import {
   SampleSigninRes,
 } from '../models';
 import { filterSampleList, signinProcess } from './sample.virtual-backend';
-import { cache } from '../../../decorators';
+import { cache } from '../../../common/decorators';
 
 /**
  * 샘플 페이지를 위한 API Service.
  */
-export const sampleApi = {
+export const sampleDataService = {
   /**
    * 샘플 목록을 불러온다.
    * @param params
@@ -20,8 +20,9 @@ export const sampleApi = {
   loadList(params: SampleListLoadParams) {
     const fetch = cache('session')<ListRes<SampleItemModel>>(publicApi.get);
 
-    return fetch('/data/sample-list.json', params)
-      .then(filterSampleList(params));
+    return fetch('/data/sample-list.json', params).then(
+      filterSampleList(params),
+    );
   },
 
   /**

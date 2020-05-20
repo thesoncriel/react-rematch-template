@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
 /* eslint-disable max-classes-per-file */
 
-import { HashMap } from '../common/model';
+import { HashMap } from '../model';
 import {
   isServer,
   isStorageAvailable,
   marshalJson,
   unmarshalJson,
-} from '../util';
+} from '../../util';
 
 enum StorageType {
   MEMORY = 'memory',
@@ -47,8 +47,7 @@ const MEMORY_CACHE_MAX = 100;
 
 class MemorySimpleStorage<T extends string | object>
   implements ISimpleStorage<T> {
-  constructor(readonly key: string) {
-  }
+  constructor(readonly key: string) {}
 
   get(): T {
     return (memoryCache[this.key] || null) as T;
@@ -80,7 +79,7 @@ class MemorySimpleStorage<T extends string | object>
 
 class SimpleStorageAdapter<T extends string | object>
   implements ISimpleStorage<T> {
-  constructor(readonly key: string, private storage: Storage) { }
+  constructor(readonly key: string, private storage: Storage) {}
 
   get(): T {
     return unmarshalJson(this.storage.getItem(this.key)) as T;

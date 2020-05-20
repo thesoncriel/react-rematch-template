@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import appConfig from '../common/app.config';
-import { HashMap } from '../common/model';
-import { isServer } from '../util';
+import appConfig from '../app.config';
+import { HashMap } from '../model';
+import { isServer } from '../../util';
 import { ITokenProvider } from './token-provider.factory';
 
 /**

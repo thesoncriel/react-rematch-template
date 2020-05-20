@@ -1,14 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
 import { HashMap, InputChangeArgs } from '../common/model';
-import { AppState } from '../entries/stores';
 
-export type AsyncDispatch<A extends AnyAction = AnyAction> = ThunkDispatch<
-  AppState,
-  any,
-  A
->;
+// export type AsyncDispatch<A extends AnyAction = AnyAction> = ThunkDispatch<
+//   AppState,
+//   any,
+//   A
+// >;
 
 /**
  * 비동기 액션을 수행하는 이펙트 함수를 만든다. 쿼리 인자가 필요하다.
@@ -16,23 +13,23 @@ export type AsyncDispatch<A extends AnyAction = AnyAction> = ThunkDispatch<
  * - A: 지정할 Action 타입. 기본 AnyAction
  * @param fnProcess type 이 들어간 액션 객체를 비동기로 반환 해야 한다.
  */
-export function createEffect<
-  Q = void,
-  A extends AnyAction = AnyAction
->(
-  fnProcess: (
-    payload: Q,
-    dispatch: AsyncDispatch<A>,
-    getState: () => AppState,
-  ) => void,
-) {
-  return (payload: Q) => (
-    dispatch: AsyncDispatch<A>,
-    getState: () => AppState,
-  ) => {
-    fnProcess(payload, dispatch, getState);
-  };
-}
+// export function createEffect<
+//   Q = void,
+//   A extends AnyAction = AnyAction
+// >(
+//   fnProcess: (
+//     payload: Q,
+//     dispatch: AsyncDispatch<A>,
+//     getState: () => AppState,
+//   ) => void,
+// ) {
+//   return (payload: Q) => (
+//     dispatch: AsyncDispatch<A>,
+//     getState: () => AppState,
+//   ) => {
+//     fnProcess(payload, dispatch, getState);
+//   };
+// }
 
 /**
  * 리듀서에서 입력 변경 사항을 공통 처리할 때 쓰이는 함수

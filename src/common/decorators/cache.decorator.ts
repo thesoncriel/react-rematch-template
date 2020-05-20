@@ -1,5 +1,5 @@
 import { storageFactory } from '../factories/storage.factory';
-import { tap, isServer } from '../util';
+import { tap, isServer } from '../../util';
 
 /**
  * 테스트중 캐시 기능을 무력화 하고 싶을 때 true 로 바꿔서 쓸 것.
@@ -7,7 +7,7 @@ import { tap, isServer } from '../util';
 const FORCE_NOT_CACHE = false;
 
 type CacheDecorator = <T extends string | object, P = any>(
-  fn: (url: string, params?: P) => Promise<T>
+  fn: (url: string, params?: P) => Promise<T>,
 ) => (url: string, params?: P) => Promise<T>;
 
 function createKey<P = any>(url: string, params?: any) {
@@ -28,7 +28,7 @@ export function cache(type?: 'local' | 'session' | 'memory'): CacheDecorator {
      * 캐시가 적용된 함수.
      */
     return <T extends string | object, P = any>(
-      fn: (url: string, params?: P) => Promise<T>
+      fn: (url: string, params?: P) => Promise<T>,
     ) => (url: string, params?: P) => fn(url, params);
   }
 
@@ -37,7 +37,7 @@ export function cache(type?: 'local' | 'session' | 'memory'): CacheDecorator {
    * @param fn API 함수
    */
   const cacheDecorator = <T extends string | object, P = any>(
-    fn: (url: string, params?: P) => Promise<T>
+    fn: (url: string, params?: P) => Promise<T>,
   ) => {
     return (url: string, params?: P) => {
       const storage = storageFactory<T>(type, createKey<P>(url, params));
@@ -47,8 +47,7 @@ export function cache(type?: 'local' | 'session' | 'memory'): CacheDecorator {
         return Promise.resolve(value);
       }
 
-      return fn(url, params)
-        .then(tap(data => storage.set(data)));
+      return fn(url, params).then(tap(data => storage.set(data)));
     };
   };
 

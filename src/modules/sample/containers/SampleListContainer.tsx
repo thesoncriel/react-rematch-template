@@ -1,10 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selSampleItems } from '../selectors';
+import { useRDispatch } from '../../../common/hooks';
 import { SampleList } from '../components';
-import { effSampleListLoad } from '../effects/sample.effect';
 import { SampleListLoadParams } from '../models';
-import { useADispatch } from '../../../common/hooks';
+import { selSampleItems } from '../selectors';
 
 interface Props {
   queries?: SampleListLoadParams;
@@ -15,13 +14,16 @@ interface Props {
  * @param props
  */
 export const SampleListContainer: FC<Props> = ({ queries }) => {
-  const dispatch = useADispatch();
+  const dispatch = useRDispatch();
   const items = useSelector(selSampleItems);
 
-  useEffect(() => dispatch(effSampleListLoad({ ...queries })), [
-    dispatch,
-    queries,
-  ]);
+  useEffect(() => {
+    // dispatch({
+    //   type: 'sampleBasic/sampleListLoadAsync',
+    //   payload: { ...queries },
+    // });
+    dispatch.sampleBasic.sampleListLoadAsync({ ...queries });
+  }, [dispatch, queries]);
 
   return <SampleList items={items} />;
 };

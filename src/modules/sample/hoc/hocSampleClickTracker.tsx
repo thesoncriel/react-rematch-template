@@ -1,5 +1,5 @@
 import React, { ComponentType, memo, MouseEventHandler } from 'react';
-import { useADispatch } from '../../../common/hooks';
+import { useDispatch } from 'react-redux';
 
 /**
  * HOC: 샘플 클릭 트래커.
@@ -15,7 +15,7 @@ export function hocSampleClickTracker<P>(
   TargetComp: ComponentType<P>,
 ) {
   const Comp: ComponentType<P> = props => {
-    const dispatch = useADispatch();
+    const dispatch = useDispatch();
 
     const handleClick: MouseEventHandler = event => {
       const { onClick } = props as any;

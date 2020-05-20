@@ -1,22 +1,21 @@
 import { useDispatch } from 'react-redux';
-import { AnyAction } from 'redux';
-import { AsyncDispatch, cleanUpNil } from '../../util';
 import { useLocation, useParams } from 'react-router';
+import { RDispatch } from '../../entries/stores';
+import { cleanUpNil } from '../../util';
 
 /**
  * @description
  * 훅: dispatch 를 비동기로 수행하기 위한 기능.
  *
- * createEffect 를 통해 만들어진 사이드 이펙트 처리 함수를 전달 할 때는 이 훅을 사용한다.
- *
- * (물론 동기적인 액션에 이것을 써도 상관 없다)
+ * rematch 로 만들어진 각종 모델에 접근하여 액션을 수행할 수 있다.
  *
  * 내부적으로 react-redux 내의 useDispatch 를 수행한다.
  *
  * @see useDispatch
+ * @see RDispatch
  */
-export function useADispatch() {
-  return useDispatch<AsyncDispatch<AnyAction>>();
+export function useRDispatch() {
+  return useDispatch<RDispatch>();
 }
 
 /**
@@ -49,7 +48,7 @@ export function useQuery<T = any>(def?: Partial<T>): T {
   if (def) {
     return {
       ...def,
-      ...mQuery
+      ...mQuery,
     };
   }
 
@@ -80,7 +79,6 @@ export function useQueryParams<T>(def?: Partial<T>): T {
     ...params,
   };
 }
-
 
 // export function useQuery<T = any>(): T {
 //   const search = useLocation().search;

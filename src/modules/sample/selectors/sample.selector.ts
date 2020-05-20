@@ -1,12 +1,6 @@
 import { AppState } from '../../../entries/stores';
 
-/**
- * 셀렉터: 샘플 상태를 가져온다.
- * @param state
- */
-const selSample = (state: AppState) => state.sample;
-
-const selBasic = (state: AppState) => selSample(state).basic;
+const selBasic = (state: AppState) => state.sampleBasic;
 
 /**
  * 셀렉터: 샘플 목록 데이터를 가져온다.

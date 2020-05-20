@@ -1,5 +1,5 @@
 import { storageFactory, ISimpleStorage } from './storage.factory';
-import { makeNumberArray } from '../util';
+import { makeNumberArray } from '../../util';
 
 function createMockStorage(): Storage {
   let data: { [key: string]: string } = {};

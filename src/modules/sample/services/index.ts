@@ -1,2 +1,2 @@
-export * from './sample.api';
+export * from './sample.data-service';
 export * from './sample.create';

@@ -6,7 +6,7 @@ import {
   pipeBearerTokenHeader,
   pipeFormMultipartHeader,
   pipeJsonHeader,
-} from '../../../factories';
+} from '../../../common/factories';
 import { bearerTokenProvider } from './token-provider.service';
 
 /**
