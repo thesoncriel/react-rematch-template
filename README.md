@@ -7,9 +7,8 @@
 - react.js
   - styled-components
 - redux
-  - redux-thunk
   - react-redux
-  - typesafe-actions
+  - @rematch/core
 - lodash
 - axios
 - typescript
@@ -76,23 +75,21 @@ npm run deploy:prod
 
 모든 기능(feature)은 modules 내에 구성하며 각 module 의 구성요소는 다음과 같다.
 
-- actions : redux 에서 쓰이는 액션을 정의.
 - components : 각종 컴포넌트들. atomic design 을 준수한다.
   - atoms : 단일 컴포넌트. 이 이상 쪼개질 수 없다. ReactDOM 및 SC로 직접 작성하거나 외부 UI 라이브러리(ex: Bootstrap, Material-UI 등)를 직접적으로 이용하는 컴포넌트 이다.
   - molecules : 최소한 1개 이상의 단일 컴포넌트를 이용한 조합 컴포넌트.
   - organisms : 최소한 1개 이상의 조합 컴포넌트를 이용한 복합 컴포넌트.
   - adaptives : 적응형 컴포넌트. 반응형으로 대응이 어려워서 상황에 맞는 컴포넌트를 다르게 적용시킬 때 사용.
 - containers : Store 를 직접적으로 이용하는 컴포넌트. atomic design 의 template 에 대응된다.
-- effects : redux 에서 쓰이는 이펙트를 정의. redux-thunk 를 이용하며 미리 정의된 `createEffect` 함수를 이용하여 작성 해야한다.
 - hoc : High Order Component 모음.
 - hooks : Custom Hooks 모음.
 - messages : UI 에서 쓰이는 각종 메시지 모음.
 - models : 현재 기능에서만 쓰이는 모델을 정의. interface 나 enum, type 을 정의한다.
 - pages: 최종적으로 컴포넌트를 내장하여 화면에 출력될 페이지 컴포넌트. 파라미터 처리는 이 곳에서만 하도록 한다.
-- reducers : redux 에서 쓰이는 리듀서를 정의.
 - selectors : container 나 hooks 에서 쓰이는 셀렉터를 정의.
 - services : 데이터를 전달/조작 하거나 생성하는 등의 서비스 역할을 맡는 모든 객체 및 함수를 포함한다.
 - styles : 현재 기능 범위 내에서만 공통으로 쓰이는 각종 스타일을 정의한다.
+- rematch: rematch 를 이용하는 Store Model 을 정의한다.
 - routes.ts : 라우팅 내용을 설정한다.
 
 ## Snippets
