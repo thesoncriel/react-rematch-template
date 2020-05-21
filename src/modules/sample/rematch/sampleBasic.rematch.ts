@@ -1,4 +1,4 @@
-import { ModelConfig, ModelEffects } from '@rematch/core';
+import { ModelConfig } from '../../../entries/stores.util';
 import { ListRes } from '../../../common';
 import { RDispatch } from '../../../entries/stores';
 import {
@@ -40,23 +40,23 @@ export function getInitSampleState(): SampleState {
   };
 }
 
-type Effects = (dispatch: RDispatch) => ModelEffects<any>;
+// type Effects = (dispatch: RDispatch) => ModelEffects<any>;
 
-const effects: Effects = dispatch => ({
-  async sampleListLoadAsync(payload: SampleListLoadParams) {
-    dispatch.sampleBasic.sampleListLoad();
+// const effects: Effects = dispatch => ({
+//   async sampleListLoadAsync(payload: SampleListLoadParams) {
+//     dispatch.sampleBasic.sampleListLoad();
 
-    try {
-      const res = await sampleDataService.loadList(payload);
+//     try {
+//       const res = await sampleDataService.loadList(payload);
 
-      dispatch.sampleBasic.sampleListSucc(res);
-    } catch (err) {
-      console.log(err);
-      alert(err.message);
-      dispatch.sampleBasic.sampleListFail(err);
-    }
-  },
-});
+//       dispatch.sampleBasic.sampleListSucc(res);
+//     } catch (err) {
+//       console.log(err);
+//       alert(err.message);
+//       dispatch.sampleBasic.sampleListFail(err);
+//     }
+//   },
+// });
 
 export const sampleBasic: ModelConfig<SampleState> = {
   state: getInitSampleState(),
@@ -75,7 +75,19 @@ export const sampleBasic: ModelConfig<SampleState> = {
       loading: false,
     }),
   },
-  effects: dispatch => {
-    return effects(dispatch as any);
-  },
+  effects: (dispatch: RDispatch) => ({
+    async sampleListLoadAsync(payload: SampleListLoadParams) {
+      dispatch.sampleBasic.sampleListLoad();
+
+      try {
+        const res = await sampleDataService.loadList(payload);
+
+        dispatch.sampleBasic.sampleListSucc(res);
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+        dispatch.sampleBasic.sampleListFail(err);
+      }
+    },
+  }),
 };
